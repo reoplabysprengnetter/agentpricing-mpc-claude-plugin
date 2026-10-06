@@ -14,6 +14,7 @@
     "comparables",
     "italy"
   ],
+  "license": "LicenseRef-AgentPricing-Proprietary",
   "icon": "./assets/agentpricing-icon.png",
   "documentationUrl": "https://www.agentpricing.com/",
   "supportUrl": "https://www.agentpricing.com/",

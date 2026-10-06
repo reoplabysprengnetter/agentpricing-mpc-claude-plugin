@@ -30,12 +30,14 @@ Dopo l’installazione, autentica il server MCP dal pannello `/mcp` (OAuth). Il 
 └── plugin/
     ├── .claude-plugin/plugin.json
     ├── .mcp.json
+    ├── LICENSE
     ├── assets/
     └── skills/
 ```
 
 ## Licenza e supporto
 
+Licenza: vedi [plugin/LICENSE](plugin/LICENSE) (AgentPricing Proprietary License).  
 Sviluppato da [Reopla srl](https://www.agentpricing.com/).  
 Privacy: https://www.agentpricing.com/static/docs/informativa_clienti.html  
 Termini: https://www.agentpricing.com/static/docs/terms.pdf

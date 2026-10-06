@@ -1,0 +1,93 @@
+AgentPricing Proprietary License
+
+Copyright (c) 2026 Reopla srl, operating as AgentPricing.
+All rights reserved.
+
+1. Definitions
+
+"Licensor" means Reopla srl, with registered office at Turin, Corso Carlo E Nello Rosselli 114/5/E, 10129
+VAT number 11302360018, operating under the brand AgentPricing.
+
+"Software" means all files in this repository, including the plugin
+manifest, skills, prompts, configuration files, scripts, documentation and
+any updates made available by the Licensor.
+
+"AgentPricing Services" means the AgentPricing platform, its MCP server and
+any related service operated by the Licensor.
+
+"Customer" means a person or entity that holds an active subscription or
+agreement with the Licensor for the AgentPricing Services, together with the
+users that Customer has authorized under that subscription or agreement.
+
+2. Limited permission to use
+
+Subject to the terms of this License, the Licensor grants each Customer a
+limited, non-exclusive, non-transferable, non-sublicensable and revocable
+permission to install and use the Software, in unmodified form, solely
+within Claude applications, through Anthropic's plugin directory or another
+channel authorized by the Licensor, and solely to access the AgentPricing
+Services for the duration of the Customer's subscription or agreement.
+
+Use of the AgentPricing Services remains subject to the Customer's
+subscription or agreement and to the Licensor's terms of service. Installing
+the Software does not by itself grant access to the AgentPricing Services.
+
+3. Distribution through the Claude directory
+
+The Licensor permits Anthropic and its affiliates to host, scan, review,
+list and distribute the Software through the Claude plugin directory and
+related Claude applications, to the extent needed to operate the directory
+and in accordance with the Anthropic Software Directory Terms.
+
+4. Restrictions
+
+Except as expressly permitted in sections 2 and 3, no one may, in whole or
+in part:
+
+  a) copy the Software, except as strictly needed to install and run it;
+  b) modify, adapt, translate or create derivative works of the Software;
+  c) reuse the Software, or any of its skills, prompts, instructions or
+     configurations, in other products, plugins, agents or services;
+  d) distribute, publish, sell, rent, lend, sublicense or otherwise make
+     the Software available to third parties;
+  e) reverse engineer the Software or use it to build a competing product
+     or service;
+  f) use the Software, or any part of it, to train or fine-tune artificial
+     intelligence or machine learning models;
+  g) remove or alter any copyright, trademark or other proprietary notice.
+
+The public visibility of this repository does not grant any license or
+right other than those expressly stated in this License.
+
+5. Ownership
+
+The Software and all intellectual property rights in it are and remain the
+exclusive property of the Licensor. All rights not expressly granted in this
+License are reserved. This License grants no right to use the AgentPricing
+name, logos or other trademarks.
+
+6. Termination
+
+This License ends automatically, without notice, when the Customer's
+subscription or agreement ends or if any of its terms is breached. On
+termination, the Customer must stop using the Software and uninstall and
+delete every copy of it.
+
+7. No warranty and limitation of liability
+
+The Software is provided "as is", without warranty of any kind, express or
+implied, including warranties of merchantability, fitness for a particular
+purpose and non-infringement. To the maximum extent permitted by applicable
+law, the Licensor shall not be liable for any damages arising from the use
+of, or inability to use, the Software. Nothing in this License limits any
+liability that cannot be limited under applicable law.
+
+8. Governing law and jurisdiction
+
+This License is governed by the laws of Italy. The Court of Turin has
+exclusive jurisdiction over any dispute arising from or relating to this
+License, without prejudice to any mandatory consumer protection rules.
+
+9. Contact
+
+For licensing questions, contact info@agentpricing.com .
