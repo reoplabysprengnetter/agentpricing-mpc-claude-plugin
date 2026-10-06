@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "agentpricing-mcp": {
+      "type": "http",
+      "url": "https://mcp.agentpricing.com/mcp"
+    }
+  }
+}

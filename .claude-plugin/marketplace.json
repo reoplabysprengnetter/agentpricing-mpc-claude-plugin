@@ -1,0 +1,16 @@
+{
+  "name": "agentpricing-marketplace",
+  "description": "Real estate market analysis for professional agents — AgentPricing Connector.",
+  "owner": {
+    "name": "Reopla srl",
+    "url": "https://www.agentpricing.com/"
+  },
+  "plugins": [
+    {
+      "name": "agentpricing",
+      "displayName": "AgentPricing Connector",
+      "source": "./plugin",
+      "description": "AgentPricing aiuta gli agenti immobiliari a preparare valutazioni, confrontare venduti e annunci concorrenti, verificare prezzi richiesti, analizzare i mercati locali e riaprire report esistenti. Include 11 skill per acquisizioni, appuntamenti, confronto con i proprietari, analisi delle zone e scenari di messa a reddito. I singoli tool MCP restano richiamabili direttamente. Le analisi territoriali standalone non richiedono la creazione di una valutazione; le sezioni dei report riutilizzano il riferimento selezionato. Richiede un account AgentPricing autenticato. Distingue stime, prezzi richiesti, compravendite e quotazioni OMI, riportando fonti e limiti dei dati."
+    }
+  ]
+}

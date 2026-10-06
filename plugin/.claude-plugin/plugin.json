@@ -1,0 +1,103 @@
+{
+  "name": "agentpricing",
+  "displayName": "AgentPricing Connector",
+  "version": "1.0.0",
+  "description": "AgentPricing helps professional real estate agents prepare property valuations, compare sold properties and active listings, assess asking prices, study local markets and reopen existing valuation reports. Eleven focused skills support acquisition appointments, discussions with sellers, area comparisons and rental investment scenarios. All public MCP tools remain available for individual requests. Standalone market analyses do not require creating a valuation report; report sections reuse the selected report reference. Requires an authenticated AgentPricing account. Results identify their sources and limitations; asking prices, recorded transactions, OMI quotations and estimated values are kept distinct.",
+  "author": {
+    "name": "Reopla srl",
+    "url": "https://www.agentpricing.com/"
+  },
+  "homepage": "https://www.agentpricing.com/",
+  "keywords": [
+    "real-estate",
+    "valuation",
+    "comparables",
+    "italy"
+  ],
+  "icon": "./assets/agentpricing-icon.png",
+  "documentationUrl": "https://www.agentpricing.com/",
+  "supportUrl": "https://www.agentpricing.com/",
+  "privacyPolicyUrl": "https://www.agentpricing.com/static/docs/informativa_clienti.html",
+  "termsOfServiceUrl": "https://www.agentpricing.com/static/docs/terms.pdf",
+  "metadata": {
+    "com.openai": {
+      "shortDescription": "Real estate market analysis",
+      "category": "Data & Analytics",
+      "capabilities": [
+        "Property valuation",
+        "Real estate market data",
+        "Comparable properties"
+      ],
+      "defaultPrompt": [
+        "Confronta immobili venduti e annunci concorrenti per un immobile che sto acquisendo.",
+        "Verifica un prezzo richiesto usando venduti comparabili e dati del mercato locale.",
+        "Apri un report di valutazione esistente e spiegami le evidenze di mercato."
+      ],
+      "review": {
+        "demo_recording_url": "https://reopla-avm.s3.eu-central-1.amazonaws.com/agentpricing-demo.mp4",
+        "commerce": true,
+        "commerce_description": "Access requires an AgentPricing subscription that includes an allowance of MCP credits. The subscription is purchased and paid for on agentpricing.com. The plugin uses the subscriber's authenticated AgentPricing account; it does not provide a checkout or payment-processing tool.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Create a residential valuation from explicit agent intent. Start a new chat with a dedicated test account authorized to create reports and sufficient credits; use legacy backend mode. The property attributes are test inputs, not facts about a real listing.",
+              "prompt": "Prepara una nuova valutazione per un incarico di vendita: appartamento in Corso Traiano 33, Torino, 90 mq commerciali, 3 locali, 1 bagno, secondo piano con ascensore, manutenzione buona, classe energetica F.",
+              "tools_triggered": "agentpricing_evaluate_residential_property",
+              "expected_behavior": "Pass property.address=Corso Traiano, civico=33, city=Torino, mq=90, tipologia=appartamento, manutenzione=buono, piano=2, ascensore=true and energy_class=F. Return only values and ranges supported by the successful report, distinguish the estimated value from an asking price, and disclose returned limitations. Do not add an automatic credit-balance call or regenerate the same report. If required input is unresolved, ask the returned clarification and continue with the agent's answer; never invent successful results."
+            },
+            {
+              "description": "Find ranked sold comparables and current competition without creating a report. Use a dedicated account with standalone data access. Subject attributes are test inputs; market records remain live.",
+              "prompt": "Per acquisire un appartamento di 90 mq, in buono stato al secondo piano, in Corso Traiano 33 a Torino, cerca venduti simili e concorrenza attuale entro 1500 metri, senza creare una valutazione.",
+              "tools_triggered": "agentpricing_get_property_sold_comparables",
+              "expected_behavior": "Use area.address=Corso Traiano, area.civico=33, area.city=Torino, area.radius_meters=1500 and subject_property.surface_sqm=90 with subtype appartamento, floor=2 and condition buono. Present returned ranked sold comparables separately from returned market_comparables. Preserve similarity and sample limitations; do not invent listing URLs. analysis_scope must be standalone_area and report_generated=false. Do not invoke evaluate tools or report-bound comparables, or repeat component calls already included by the composite."
+            },
+            {
+              "description": "Assess a single asking price with standalone data, preserving the narrow request. Use the same subject test inputs and an account with standalone access.",
+              "prompt": "Verifica soltanto il prezzo richiesto di 320000 euro per un appartamento di 90 mq in buono stato, al secondo piano, in Corso Traiano 33 a Torino, con confronti entro 1500 metri. Non creare report.",
+              "tools_triggered": "agentpricing_analyze_listing_price",
+              "expected_behavior": "Pass asking_price=320000, the supplied area with radius_meters=1500 and subject_property.surface_sqm=90. Explain the returned gaps against sold comparables and active asking prices separately, using the tool's evidence and warnings. No report generation, preliminary credit-balance call, report-bound asking-price analysis or expanded acquisition workflow. Never treat absent observations as zero or fabricate a market conclusion."
+            },
+            {
+              "description": "Reuse a historical report and read its OMI section. Prepare the dedicated review account with at least one accessible residential report for Corso Traiano 33, Torino. If several match, select one through the user's answer. Legacy backend mode is required.",
+              "prompt": "Trova nello storico la valutazione dell'appartamento in Corso Traiano 33 a Torino, riaprila e mostrami soltanto le quotazioni OMI di quel report, senza generarne uno nuovo.",
+              "tools_triggered": "agentpricing_list_property_reports, agentpricing_get_property_report_details, agentpricing_get_property_omi",
+              "expected_behavior": "List accessible reports, preserve the selected report_reference, load it with get_property_report_details and pass that same reference to get_property_omi. Ask for selection if ambiguous; never manufacture a reference or ask for a sanitized viewkey. Show only returned report OMI values with period and conservation context. No evaluate call, territorial OMI substitution, new report confirmation or additional report sections. The review account must contain the fixture before this case can pass."
+            },
+            {
+              "description": "Retrieve a local market snapshot as a standalone analysis. Use a dedicated account with standalone market access; values and sample size vary with the live market.",
+              "prompt": "Mostrami una panoramica del mercato immobiliare intorno a Corso Traiano 33, Torino, entro 1500 metri: venduti, quotazioni OMI e liquidità. Non creare un report di valutazione.",
+              "tools_triggered": "agentpricing_get_area_market_snapshot",
+              "expected_behavior": "Pass the supplied area with radius_meters=1500. Present only available snapshot sections, preserve effective periods, partial-section warnings and sample limits, and distinguish recorded sales from OMI quotations. analysis_scope must be standalone_area and report_generated=false. No evaluation, report-bound market summary or unnecessary repetitions of the snapshot's component tools."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Sending messages is outside AgentPricing capabilities. Explain that the plugin cannot send email; offer a draft only if useful. Do not invoke MCP tools merely to claim an email was sent.",
+              "prompt": "Invia subito per email al proprietario la valutazione che abbiamo già discusso."
+            },
+            {
+              "description": "Listing publication is unsupported. Explain that AgentPricing cannot publish or edit listings on external portals. Do not call valuation or search tools and do not claim publication.",
+              "prompt": "Pubblica questo appartamento a 320000 euro sui portali immobiliari usando AgentPricing."
+            },
+            {
+              "description": "A cadastral ownership change is outside the plugin's data and valuation tools. Explain the unsupported action and do not invoke any AgentPricing tool or claim that official records changed.",
+              "prompt": "Aggiorna l'intestatario catastale di questo immobile inserendo il nuovo proprietario."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "countries": [
+          "IT"
+        ],
+        "release_notes": "Initial release with eleven workflows for professional real estate agents and access to the complete AgentPricing MCP tool catalog. Separates standalone market analyses from report-bound sections and preserves direct single-tool requests.",
+        "translations": {
+          "it-IT": {
+            "subtitle": "Valutazioni per agenti",
+            "description": "AgentPricing aiuta gli agenti immobiliari a preparare valutazioni, confrontare venduti e annunci concorrenti, verificare prezzi richiesti, analizzare i mercati locali e riaprire report esistenti. Include 11 skill per acquisizioni, appuntamenti, confronto con i proprietari, analisi delle zone e scenari di messa a reddito. I singoli tool MCP restano richiamabili direttamente. Le analisi territoriali standalone non richiedono la creazione di una valutazione; le sezioni dei report riutilizzano il riferimento selezionato. Richiede un account AgentPricing autenticato. Distingue stime, prezzi richiesti, compravendite e quotazioni OMI, riportando fonti e limiti dei dati."
+          }
+        }
+      }
+    }
+  }
+}
